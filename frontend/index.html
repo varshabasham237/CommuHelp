@@ -1,26 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CommuHelp - Report Issue</title>
+    <meta charset="UTF-8">
+    <title>CommuHelp | Smart Community Helper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        hr {
+            margin: 30px 0;
+        }
+
+        .complaint-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #fff;
+            margin-right: 8px;
+        }
+
+        .pending {
+            background: #e67e22;
+        }
+
+        .category {
+            background: #2ecc71;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Report a Community Issue</h2>
 
-    <form>
-        <label>Issue Description:</label><br>
-        <textarea rows="4" cols="50" placeholder="Describe the issue"></textarea><br><br>
+<div class="container">
+    <h1>CommuHelp</h1>
+    <p style="text-align:center;">Report and track community issues easily</p>
 
-        <label>Location:</label><br>
-        <input type="text" placeholder="Enter location"><br><br>
+    <div class="form-group">
+        <label>Issue Description</label>
+        <textarea id="description" placeholder="Describe the issue..."></textarea>
+    </div>
 
-        <button type="submit">Submit Complaint</button>
-    </form>
+    <div class="form-group">
+        <label>Location</label>
+        <input type="text" id="location" placeholder="Enter location">
+    </div>
+
+    <button onclick="submitComplaint()">Submit Complaint</button>
 
     <hr>
 
-    <h3>Sample Submitted Complaint</h3>
-    <p><b>Description:</b> Garbage not collected</p>
-    <p><b>AI Category:</b> Waste</p>
-    <p><b>Status:</b> Pending</p>
+    <h2>Submitted Complaints</h2>
+    <div id="complaints"></div>
+
+    <div class="footer">
+        CommuHelp • Smart Community Assistance Platform
+    </div>
+</div>
+
+<script>
+    function submitComplaint() {
+        const desc = document.getElementById("description").value;
+        const loc = document.getElementById("location").value;
+
+        if (desc === "" || loc === "") {
+            alert("Please fill all fields");
+            return;
+        }
+
+        // Mock AI logic
+        const aiCategory = "Waste";
+        const aiSuggestion = "Forwarded to concerned department";
+
+        const complaintHTML = `
+            <div class="complaint-card">
+                <p><strong>Description:</strong> ${desc}</p>
+                <p><strong>Location:</strong> ${loc}</p>
+                <span class="badge category">${aiCategory}</span>
+                <span class="badge pending">Pending</span>
+                <p><strong>AI Suggestion:</strong> ${aiSuggestion}</p>
+            </div>
+        `;
+
+        document.getElementById("complaints").innerHTML += complaintHTML;
+
+        document.getElementById("description").value = "";
+        document.getElementById("location").value = "";
+    }
+</script>
+
 </body>
 </html>
