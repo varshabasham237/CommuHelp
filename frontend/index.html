@@ -26,6 +26,12 @@
             color: #2c3e50;
         }
 
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
@@ -41,6 +47,7 @@
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            font-size: 14px;
         }
 
         button {
@@ -51,6 +58,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -88,7 +96,7 @@
 
         .footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
             color: #777;
             font-size: 14px;
         }
@@ -98,7 +106,7 @@
 
 <div class="container">
     <h1>CommuHelp</h1>
-    <p style="text-align:center;">Report and track community issues easily</p>
+    <p class="subtitle">Smart Community Assistance Platform</p>
 
     <div class="form-group">
         <label>Issue Description</label>
@@ -118,7 +126,7 @@
     <div id="complaints"></div>
 
     <div class="footer">
-        CommuHelp • Smart Community Assistance Platform
+        © 2025 CommuHelp | Technology That Feels Human
     </div>
 </div>
 
@@ -132,9 +140,28 @@
             return;
         }
 
-        // Mock AI logic
-        const aiCategory = "Waste";
-        const aiSuggestion = "Forwarded to concerned department";
+        // ---- Mock AI logic with department mapping ----
+        let aiCategory = "";
+        let aiSuggestion = "";
+
+        const text = desc.toLowerCase();
+
+        if (text.includes("garbage") || text.includes("waste")) {
+            aiCategory = "Waste";
+            aiSuggestion = "Forwarded to Sanitation Department";
+        } else if (text.includes("streetlight") || text.includes("light")) {
+            aiCategory = "Streetlight";
+            aiSuggestion = "Forwarded to Electricity Department";
+        } else if (text.includes("road") || text.includes("pothole")) {
+            aiCategory = "Road";
+            aiSuggestion = "Forwarded to Roads & Transport Department";
+        } else if (text.includes("water") || text.includes("leak")) {
+            aiCategory = "Water";
+            aiSuggestion = "Forwarded to Water Supply Department";
+        } else {
+            aiCategory = "General";
+            aiSuggestion = "Forwarded to Municipal Corporation";
+        }
 
         const complaintHTML = `
             <div class="complaint-card">
